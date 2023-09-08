@@ -1,0 +1,12 @@
+# IDE files
+/.idea
+
+# build files
+/cmake-build-debug
+/cmake-build-release
+/cmake-build-relwithdebinfo
+
+# logs, caches and debug data
+game/logs
+game/debug
+game/cache

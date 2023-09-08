@@ -1,0 +1,128 @@
+deps:
+  - "res://sprites/owl"
+  - "res://sprites/background"
+  - "res://fonts/tiltwrap"
+  - "res://effects/sparks"
+  - "res://effects/feathers"
+  - "res://sprites/coin"
+  - "res://sprites/column"
+  - "res://scripts/background"
+  - "res://scripts/ui"
+  - "res://scripts/obstacles"
+  - "res://scripts/owl"
+  - "res://scripts/game"
+  - "res://audio/ambient"
+  - "res://audio/collect"
+  - "res://audio/flap"
+  - "res://audio/gameover"
+tree:
+  object: "root"
+  components:
+    - component: Spatial2d
+  children:
+    - object: "game"
+      components:
+        - component: Spatial2d
+        - component: ScriptComponent
+          script: "res://scripts/game"
+    - object: "camera"
+      components:
+        - component: Spatial2d
+          pos: "64 36"
+        - component: Camera2d
+          screen_size: "128 72"
+    - object: "ui"
+      components:
+        - component: Spatial2d
+        - component: CanvasLayer
+          layer_id: 0
+        - component: ScriptComponent
+          script: "res://scripts/ui"
+        - component: AudioSource2d
+          stream: "res://audio/gameover"
+          bus: "master"
+          gain: 1.0
+          pitch_scale: 1.0
+      children:
+        - object: "dead"
+          components:
+            - component: Spatial2d
+              pos: "64 41"
+            - component: CanvasText
+              text: "YOU ARE DEAD"
+              font: "res://fonts/tiltwrap"
+              font_size: 15.0
+              font_color: "1 0 0 1"
+              centered: true
+              is_visible: false
+        - object: "restart"
+          components:
+            - component: Spatial2d
+              pos: "64 31"
+            - component: CanvasText
+              text: "press <space> to restart"
+              font: "res://fonts/tiltwrap"
+              font_size: 6.0
+              font_color: "0 0 0 1"
+              centered: true
+              is_visible: false
+        - object: "score"
+          components:
+            - component: Spatial2d
+              pos: "1 67"
+            - component: CanvasText
+              text: "score: 0"
+              font: "res://fonts/tiltwrap"
+              font_size: 6.0
+              font_color: "1 1 1 1"
+    - object: "background"
+      components:
+        - component: Spatial2d
+        - component: CanvasLayer
+          layer_id: 3
+        - component: SpriteInstance
+          sprite: "res://sprites/background"
+        - component: ScriptComponent
+          script: "res://scripts/background"
+        - component: AudioSource2d
+          stream: "res://audio/ambient"
+          bus: "master"
+          gain: 0.1
+          pitch_scale: 0.9
+          loop: true
+          autoplay: true
+    - object: "obstacles"
+      components:
+        - component: Spatial2d
+        - component: CanvasLayer
+          layer_id: 2
+        - component: ScriptComponent
+          script: "res://scripts/obstacles"
+        - component: Particles2d
+          effect: "res://effects/sparks"
+        - component: AudioSource2d
+          stream: "res://audio/collect"
+          bus: "master"
+          gain: 1.0
+          pitch_scale: 2.0
+    - object: "foreground"
+      components:
+        - component: Spatial2d
+        - component: CanvasLayer
+          layer_id: 1
+      children:
+        - object: "owl"
+          components:
+            - component: Spatial2d
+              pos: "20 36"
+            - component: SpriteInstance
+              sprite: "res://sprites/owl"
+            - component: ScriptComponent
+              script: "res://scripts/owl"
+            - component: Particles2d
+              effect: "res://effects/feathers"
+            - component: AudioSource2d
+              stream: "res://audio/flap"
+              bus: "master"
+              gain: 0.8
+              pitch_scale: 1.4
