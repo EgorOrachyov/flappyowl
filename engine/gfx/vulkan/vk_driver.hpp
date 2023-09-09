@@ -1,6 +1,6 @@
 /**********************************************************************************/
-/* Game engine tutorial                                                           */
-/* Available at github https://github.com/EgorOrachyov/game-engine-tutorial       */
+/* Flappyowl game                                                                 */
+/* Available at github https://github.com/EgorOrachyov/flappyowl                  */
 /**********************************************************************************/
 /* MIT License                                                                    */
 /*                                                                                */
@@ -158,7 +158,12 @@ namespace wmoge {
         std::vector<std::string> m_required_layers;
         std::vector<std::string> m_required_extensions;
         std::vector<std::string> m_required_device_extensions;
-        bool                     m_use_validation = true;
+
+#ifdef WG_DEBUG
+        bool m_use_validation = true;
+#else
+        bool m_use_validation = false;
+#endif
 
         VkInstance               m_instance        = VK_NULL_HANDLE;
         VkPhysicalDevice         m_phys_device     = VK_NULL_HANDLE;

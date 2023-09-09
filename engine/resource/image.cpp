@@ -1,6 +1,6 @@
 /**********************************************************************************/
-/* Game engine tutorial                                                           */
-/* Available at github https://github.com/EgorOrachyov/game-engine-tutorial       */
+/* Flappyowl game                                                                 */
+/* Available at github https://github.com/EgorOrachyov/flappyowl                  */
 /**********************************************************************************/
 /* MIT License                                                                    */
 /*                                                                                */
