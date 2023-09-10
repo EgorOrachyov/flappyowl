@@ -1,5 +1,8 @@
 # flappyowl
 
+[![🔨 build](https://github.com/EgorOrachyov/flappyowl/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/EgorOrachyov/flappyowl/actions/workflows/build.yml)
+[![🩺 clang format](https://github.com/EgorOrachyov/flappyowl/actions/workflows/clang-format.yml/badge.svg?branch=main)](https://github.com/EgorOrachyov/flappyowl/actions/workflows/clang-format.yml)
+
 Flappy owl is a simple 2d side-scrolling game inspired by a flappy bird game. The game itself is simple: scene consists
 of a dozen of objects. It has a couple of particle effects, audio effects, sprites and scripts. The game logic is
 written using Lua scripting language. Engine itself is written using C++, Vulkan, OpenAL, Lua, Yaml, etc.
@@ -8,7 +11,7 @@ Gameplay gif:
 
 ![gif](https://github.com/EgorOrachyov/flappyowl/raw/main/docs/gifs/background.gif?raw=true&sanitize=true)
 
-> The work on the engine currently in the progress! Currently, I am working on ECS support, multi-threading, separate
+> The work on the engine is currently in the progress! Currently, I am working on ECS support, multi-threading, separate
 > thread for vulkan backend, LZ4 resources compression, BCn textures compression, new scripting backend, new audio
 > system, and brand new 3d rendering system. Check this out in new repo: https://github.com/EgorOrachyov/wmoge.
 
@@ -42,7 +45,7 @@ Gameplay gif:
 
 ### Features
 
-* Moder C++17 standard based code
+* Modern C++17 standard based code
 * Platform abstraction
 * Async resource loading system
 * Built-in time profiler with support to Google trace export
@@ -73,7 +76,6 @@ Gameplay gif:
 
 * [assimp](https://github.com/assimp/assimp) for geometry, material and scene assets importing into engine.
 * [audio file](https://github.com/adamstark/AudioFile) for simple audio loading from wav files.
-* [compressonator](https://github.com/GPUOpen-Tools/compressonator) texture compression library.
 * [cxxopts](https://github.com/jarro2783/cxxopts) for command-line options processing.
 * [freetype](https://github.com/freetype/freetype) for true-type fonts loading and rendering.
 * [glfw](https://github.com/glfw/glfw) for cross-platform window and input management.

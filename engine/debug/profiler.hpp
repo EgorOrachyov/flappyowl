@@ -31,6 +31,7 @@
 #include "core/string_id.hpp"
 #include "core/timer.hpp"
 
+#include <atomic>
 #include <chrono>
 #include <memory>
 #include <mutex>
@@ -134,8 +135,14 @@ namespace wmoge {
 
 }// namespace wmoge
 
+#ifndef _WIN32
+    #define SIGNATURE __PRETTY_FUNCTION__
+#else
+    #define SIGNATURE __FUNCSIG__
+#endif
+
 #define WG_PROFILE_MARK(name, system) \
-    static ProfilerMark name(SID(__FUNCTION__), SID(__FUNCSIG__), SID(__FILE__), SID(#system), std::size_t{__LINE__})
+    static ProfilerMark name(SID(__FUNCTION__), SID(SIGNATURE), SID(__FILE__), SID(#system), std::size_t{__LINE__})
 
 #define WG_PROFILE_DESC(system, desc)        \
     WG_PROFILE_MARK(__wg_auto_mark, system); \

@@ -76,7 +76,7 @@ namespace wmoge {
         const std::string& get_fragment();
 
     protected:
-        virtual void on_build(ShaderBuilder& builder);
+        virtual void on_build(class ShaderBuilder& builder);
 
     protected:
         fast_map<StringId, ShaderVariant> m_variants;// Compiled and cached variants of the shader

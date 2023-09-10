@@ -348,7 +348,6 @@ target_link_libraries(engine PRIVATE stbimage)
 target_link_libraries(engine PRIVATE freetype)
 target_link_libraries(engine PRIVATE lz4)
 target_link_libraries(engine PRIVATE assimp)
-target_link_libraries(engine PRIVATE compressonator)
 
 # audio dependencies, private
 target_link_libraries(engine PRIVATE OpenAL)

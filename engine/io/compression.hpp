@@ -28,6 +28,7 @@
 #ifndef GAME_ENGINE_TUTORIAL_COMPRESSION_HPP
 #define GAME_ENGINE_TUTORIAL_COMPRESSION_HPP
 
+#include <cinttypes>
 #include <vector>
 
 namespace wmoge {

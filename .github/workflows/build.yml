@@ -1,0 +1,130 @@
+name: 🔨 build
+
+on:
+  push:
+    branches:
+      - main
+      - release
+      - pre-release
+    paths:
+      - '.github/**'
+      - 'deps/**'
+      - 'engine/**'
+      - 'games/**'
+      - 'template/**'
+      - '.gitignore'
+      - 'CMakeLists.txt'
+  pull_request:
+    branches: [ main ]
+
+env:
+  build_dir: "build"
+  config: "Release"
+  nt: "4"
+
+jobs:
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: install msvc for build
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+
+      - name: install ninja for build
+        uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: install Vulkan SDK
+        uses: humbletim/setup-vulkan-sdk@v1.2.0
+        with:
+          vulkan-query-version: latest
+          vulkan-components: Vulkan-Headers
+          vulkan-use-cache: true
+
+      - name: configure cmake
+        run: cmake . -G Ninja -B ${{ env.build_dir }} -DCMAKE_BUILD_TYPE=${{ env.config }}
+
+      - name: build library sources
+        run: cmake --build ${{ env.build_dir }} --target=flappyowl
+
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: install ninja for build
+        uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: update apt
+        shell: bash
+        run: |
+          sudo apt update
+
+      - name: install glfw dependencies
+        shell: bash
+        run: |
+          sudo apt-get install -y libxrandr-dev libxinerama-dev xorg-dev
+
+      - name: install glew dependencies
+        shell: bash
+        run: |
+          sudo apt-get install -y libgl1-mesa-dri libgl1-mesa-glx libgl1-mesa-dev
+          sudo apt-get install -y libxmu-dev libxi-dev libgl-dev libglx-dev
+          sudo apt-get install -y libx11-dev
+
+      - name: install openal dependencies
+        shell: bash
+        run: |
+          sudo apt-get install -y libpulse-dev portaudio19-dev libasound2-dev libjack-dev libpipewire-0.3-dev qtbase5-dev libdbus-1-dev
+
+      - name: install Vulkan SDK
+        uses: humbletim/setup-vulkan-sdk@v1.2.0
+        with:
+          vulkan-query-version: latest
+          vulkan-components: Vulkan-Headers
+          vulkan-use-cache: true
+
+      - name: configure cmake
+        run: cmake . -G Ninja -B ${{ env.build_dir }} -DCMAKE_BUILD_TYPE=${{ env.config }}
+        env:
+          CC: gcc-9
+          CXX: g++-9
+
+      - name: build library sources
+        run: cmake --build ${{ env.build_dir }} --target=flappyowl
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: install ninja for build
+        uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: install Vulkan SDK
+        uses: humbletim/setup-vulkan-sdk@v1.2.0
+        with:
+          vulkan-query-version: latest
+          vulkan-components: Vulkan-Headers
+          vulkan-use-cache: true
+
+      - name: configure cmake x64
+        run: cmake . -G Ninja -B ${{ env.build_dir }} -DCMAKE_BUILD_TYPE=${{ env.config }} -DCMAKE_OSX_ARCHITECTURES=x86_64
+        env:
+          CXX: clang++
+          CC: clang
+
+      - name: build library sources x64
+        run: cmake --build ${{ env.build_dir }} --target=flappyowl

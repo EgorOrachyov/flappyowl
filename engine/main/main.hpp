@@ -30,6 +30,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <memory>
 #include <string>
 
 namespace wmoge {
@@ -40,7 +41,7 @@ namespace wmoge {
      */
     class Main {
     public:
-        Main(class Application* application);
+        explicit Main(class Application* application);
         ~Main();
 
         bool load_config(const std::string& config_path);
